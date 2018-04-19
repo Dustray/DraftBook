@@ -6,8 +6,10 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Input.Inking;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -59,10 +61,15 @@ namespace DraftBook
 
         Symbol LassoSelect = (Symbol)0xEF20;
         Symbol TouchWriting = (Symbol)0xED5F;
+        Symbol ShowMoreBtn = (Symbol)0xE09A;
+        Symbol HideMoreBtn = (Symbol)0xE09B;
+        string mainColor;
 
         public InkPage()
         {
             this.InitializeComponent();
+            UISettings uiSettings = new UISettings();
+            mainColor = uiSettings.GetColorValue(UIColorType.AccentLight1).ToString();
             //设置鼠标和触摸可用
             MainInkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Touch;
 
@@ -106,8 +113,26 @@ namespace DraftBook
             {
                 MainInkCanvas.InkPresenter.InputDeviceTypes &= ~CoreInputDeviceTypes.Touch;
             }
-        }
 
+
+        }
+        private void ShowMoreBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (hideOrShowMoreButton.IsChecked == true)
+            {
+                hideOrShowMoreBtnIcon.Symbol = HideMoreBtn;
+                ToolTipService.SetToolTip(hideOrShowMoreButton, "隐藏更多工具");
+                toggleButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                hideOrShowMoreBtnIcon.Symbol = ShowMoreBtn;
+                ToolTipService.SetToolTip(hideOrShowMoreButton, "显示更多工具");
+                toggleButton.Visibility = Visibility.Collapsed;
+            }
+
+
+        }
         private void UnprocessedInput_PointerPressed(InkUnprocessedInput sender, PointerEventArgs args)
         {
             lasso = new Polyline()
@@ -192,6 +217,7 @@ namespace DraftBook
         {
             MainInkCanvas.InkPresenter.StrokeContainer.CopySelectedToClipboard();
             MainInkCanvas.InkPresenter.StrokeContainer.DeleteSelected();
+            //MainInkCanvas.InkPresenter.StrokeContainer.MoveSelected();//移动涂鸦
             ClearDrawnBoundingRect();
         }
         private void OnPaste(object sender, RoutedEventArgs e)
@@ -202,7 +228,7 @@ namespace DraftBook
             }
             else
             {
-               // rootPage.NotifyUser("Cannot paste from clipboard.", NotifyType.ErrorMessage);
+                // rootPage.NotifyUser("Cannot paste from clipboard.", NotifyType.ErrorMessage);
             }
         }
         private void ClearSelection()
@@ -214,15 +240,27 @@ namespace DraftBook
             }
             ClearDrawnBoundingRect();
         }
-        
+
 
         private void CurrentToolChanged(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {
- bool enabled = sender.ActiveTool.Equals(toolButtonLasso);
-
+            bool enabled = sender.ActiveTool.Equals(toolButtonLasso);
+            ToolButtonPanel.Visibility = enabled ? Visibility.Visible : Visibility.Collapsed;
             ButtonCut.IsEnabled = enabled;
             ButtonCopy.IsEnabled = enabled;
             ButtonPaste.IsEnabled = enabled;
+        }
+
+        private void HideOrShowToolbar_Click(object sender, RoutedEventArgs e)
+        {
+            if (HideOrShowToolbar.IsChecked==true)
+            {
+                MainInkToolbar.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MainInkToolbar.Visibility = Visibility.Visible;
+            }
         }
     }
 }

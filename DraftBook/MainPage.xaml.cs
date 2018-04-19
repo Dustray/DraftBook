@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -108,7 +109,11 @@ namespace DraftBook
             // This is a static public property that allows downstream pages to get a handle to the MainPage instance
             // in order to call methods that are in this class.
             Current = this;
-           // SampleTitle.Text = FEATURE_NAME;
+            // SampleTitle.Text = FEATURE_NAME;
+
+            //获取系统颜色
+            CoreApplicationView coreappview = CoreApplication.GetCurrentView();
+            coreappview.TitleBar.ExtendViewIntoTitleBar = true;
             // 绑定导航菜单
             NavMenuPrimaryListView.ItemsSource = navMenuPrimaryItem;
             NavMenuSecondaryListView.ItemsSource = navMenuSecondaryItem;

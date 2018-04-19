@@ -14,7 +14,7 @@
                 <InkCanvas x:Name="MainInkCanvas"  Height="auto" Width="auto"/>
             </Grid>
         </ScrollViewer>
-        <InkToolbar TargetInkCanvas="{x:Bind MainInkCanvas}"  ActiveToolChanged="CurrentToolChanged" HorizontalAlignment="Center" VerticalAlignment="Top">
+        <InkToolbar x:Name="MainInkToolbar" TargetInkCanvas="{x:Bind MainInkCanvas}"  ActiveToolChanged="CurrentToolChanged" Margin="0,0,48,0" HorizontalAlignment="Right" VerticalAlignment="Top">
             <InkToolbar.Resources>
                 <BrushCollection x:Key="CalligraphicPenPalette">
                     <SolidColorBrush>Black</SolidColorBrush>
@@ -44,17 +44,30 @@
                     <InkToolbarPenConfigurationControl/>
                 </InkToolbarCustomPenButton.ConfigurationContent>
             </InkToolbarCustomPenButton>
-            <InkToolbarCustomToolButton x:Name="toolButtonLasso" Click="ToolButton_Lasso" ToolTipService.ToolTip="Selection tool">
+            <InkToolbarCustomToolButton x:Name="toolButtonLasso" Click="ToolButton_Lasso" ToolTipService.ToolTip="选择工具">
                 <SymbolIcon Symbol="{x:Bind LassoSelect}"/>
             </InkToolbarCustomToolButton>
-            <InkToolbarCustomToggleButton x:Name="toggleButton" Click="Toggle_Custom" ToolTipService.ToolTip="Touch Writing">
+            <InkToolbarCustomToggleButton Visibility="Collapsed" x:Name="toggleButton" Click="Toggle_Custom" ToolTipService.ToolTip="触摸输入">
                 <SymbolIcon Symbol="{x:Bind TouchWriting}"/>
             </InkToolbarCustomToggleButton>
+            
+            <InkToolbarCustomToggleButton x:Name="hideOrShowMoreButton" Click="ShowMoreBtn_Click" ToolTipService.ToolTip="显示更多工具">
+                <SymbolIcon x:Name="hideOrShowMoreBtnIcon" Symbol="{x:Bind ShowMoreBtn}"/>
+            </InkToolbarCustomToggleButton>
+            
         </InkToolbar>
-        <StackPanel>
-            <Button x:Name="ButtonCut" Content="Cut" Width="65" Margin="3,0,3,0" Click="OnCut"/>
-            <Button x:Name="ButtonCopy" Content="Copy" Width="65" Margin="0,0,3,0" Click="OnCopy"/>
-            <Button x:Name="ButtonPaste" Content="Paste" Width="65" Margin="0,0,3,0" Click="OnPaste"/>
+        <AppBarToggleButton x:Name="HideOrShowToolbar"
+                FontFamily="Segoe MDL2 Assets" Content="&#xE890;" Foreground="White" 
+                Background="{x:Bind mainColor}" 
+                Width="48" Height="48" 
+                VerticalAlignment="Top" HorizontalAlignment="Right" Canvas.ZIndex="100"
+                Click="HideOrShowToolbar_Click" />
+        
+        <StackPanel x:Name="ToolButtonPanel" Visibility="Collapsed" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button x:Name="ButtonCut" Content="剪切" Width="65" Margin="3" Click="OnCut"/>
+            <Button x:Name="ButtonCopy" Content="复制" Width="65" Margin="3" Click="OnCopy"/>
+            <Button x:Name="ButtonPaste" Content="粘贴" Width="65" Margin="3" Click="OnPaste"/>
         </StackPanel>
+        
     </Grid>
 </Page>
