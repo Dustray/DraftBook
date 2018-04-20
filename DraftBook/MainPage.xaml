@@ -35,26 +35,7 @@
             <Setter Property="Height" Value="48"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="UseSystemFocusVisuals" Value="True" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListViewItem">
-                        <ListViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}"
-                        Control.IsTemplateFocusTarget="True"
-                        SelectionCheckMarkVisualEnabled="False"
-                        PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
-                        PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}"
-                        SelectedBackground="Transparent"
-                        SelectedForeground="{ThemeResource SystemControlForegroundAccentBrush}"
-                        SelectedPointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
-                        PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
-                        SelectedPressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
-                        DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
-                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                        ContentMargin="{TemplateBinding Padding}"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            
         </Style>
 
     </Page.Resources>
@@ -67,7 +48,7 @@
                 VerticalAlignment="Top" Canvas.ZIndex="100" />
         <SplitView Name="RootSplitView" DisplayMode="Overlay" >
             <SplitView.Pane >
-                <Grid Background="#CC000000">
+                <Grid Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}">
                     <Grid.RowDefinitions>
                         <!--空出Button的高度-->
                         <RowDefinition Height="48" />
@@ -86,7 +67,8 @@
                               SelectionMode="None" IsItemClickEnabled="True" 
                               ItemTemplate="{StaticResource DataTemplate}" 
                               ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}" 
-                              BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" BorderThickness="0,1,0,0" />
+                              BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" 
+                              BorderThickness="0,1,0,0" />
                 </Grid>
             </SplitView.Pane>
             <SplitView.Content>

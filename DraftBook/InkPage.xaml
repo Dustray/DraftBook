@@ -44,13 +44,12 @@
                     <InkToolbarPenConfigurationControl/>
                 </InkToolbarCustomPenButton.ConfigurationContent>
             </InkToolbarCustomPenButton>
-            <InkToolbarCustomToolButton x:Name="toolButtonLasso" Click="ToolButton_Lasso" ToolTipService.ToolTip="选择工具">
+            <InkToolbarCustomToolButton Visibility="Collapsed" x:Name="toolButtonLasso" Click="ToolButton_Lasso" ToolTipService.ToolTip="选择工具">
                 <SymbolIcon Symbol="{x:Bind LassoSelect}"/>
             </InkToolbarCustomToolButton>
             <InkToolbarCustomToggleButton Visibility="Collapsed" x:Name="toggleButton" Click="Toggle_Custom" ToolTipService.ToolTip="触摸输入">
                 <SymbolIcon Symbol="{x:Bind TouchWriting}"/>
             </InkToolbarCustomToggleButton>
-
             <InkToolbarCustomToggleButton x:Name="hideOrShowMoreButton" Click="ShowMoreBtn_Click" ToolTipService.ToolTip="显示更多工具">
                 <SymbolIcon x:Name="hideOrShowMoreBtnIcon" Symbol="{x:Bind ShowMoreBtn}"/>
             </InkToolbarCustomToggleButton>

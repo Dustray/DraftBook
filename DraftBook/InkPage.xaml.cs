@@ -122,12 +122,14 @@ namespace DraftBook
                 hideOrShowMoreBtnIcon.Symbol = HideMoreBtn;
                 ToolTipService.SetToolTip(hideOrShowMoreButton, "隐藏更多工具");
                 toggleButton.Visibility = Visibility.Visible;
+                toolButtonLasso.Visibility = Visibility.Visible;
             }
             else
             {
                 hideOrShowMoreBtnIcon.Symbol = ShowMoreBtn;
                 ToolTipService.SetToolTip(hideOrShowMoreButton, "显示更多工具");
                 toggleButton.Visibility = Visibility.Collapsed;
+                toolButtonLasso.Visibility = Visibility.Collapsed;
             }
 
 
