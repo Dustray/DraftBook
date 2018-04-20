@@ -63,7 +63,7 @@ namespace DraftBook
         Symbol TouchWriting = (Symbol)0xED5F;
         Symbol ShowMoreBtn = (Symbol)0xE09A;
         Symbol HideMoreBtn = (Symbol)0xE09B;
-        string mainColor= ThemeColor.mainColorL1.ToString();
+        string mainColor= ThemeColor.MainColorL1.ToString();
 
         public InkPage()
         {

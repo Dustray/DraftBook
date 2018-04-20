@@ -50,24 +50,24 @@
             <InkToolbarCustomToggleButton Visibility="Collapsed" x:Name="toggleButton" Click="Toggle_Custom" ToolTipService.ToolTip="触摸输入">
                 <SymbolIcon Symbol="{x:Bind TouchWriting}"/>
             </InkToolbarCustomToggleButton>
-            
+
             <InkToolbarCustomToggleButton x:Name="hideOrShowMoreButton" Click="ShowMoreBtn_Click" ToolTipService.ToolTip="显示更多工具">
                 <SymbolIcon x:Name="hideOrShowMoreBtnIcon" Symbol="{x:Bind ShowMoreBtn}"/>
             </InkToolbarCustomToggleButton>
-            
+
         </InkToolbar>
         <AppBarToggleButton x:Name="HideOrShowToolbar"
                 FontFamily="Segoe MDL2 Assets" Content="&#xE890;" Foreground="White" 
                 Background="{x:Bind mainColor}" 
-                Width="48" Height="48" 
+                Width="48" Height="48"
                 VerticalAlignment="Top" HorizontalAlignment="Right" Canvas.ZIndex="100"
                 Click="HideOrShowToolbar_Click" />
-        
+
         <StackPanel x:Name="ToolButtonPanel" Visibility="Collapsed" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <Button x:Name="ButtonCut" Content="剪切" Width="65" Margin="3" Click="OnCut"/>
             <Button x:Name="ButtonCopy" Content="复制" Width="65" Margin="3" Click="OnCopy"/>
             <Button x:Name="ButtonPaste" Content="粘贴" Width="65" Margin="3" Click="OnPaste"/>
         </StackPanel>
-        
+
     </Grid>
 </Page>

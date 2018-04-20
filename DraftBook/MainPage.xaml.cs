@@ -8,7 +8,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -29,7 +31,7 @@ namespace DraftBook
     {
 
         public static MainPage Current;
-        string mainColor = ThemeColor.mainColor.ToString();
+        string mainColor = ThemeColor.MainColor.ToString();
         // 为不同的菜单创建不同的List类型
         private List<NavMenuItem> navMenuPrimaryItem = new List<NavMenuItem>(
             new[]
@@ -114,9 +116,9 @@ namespace DraftBook
             Current = this;
             // SampleTitle.Text = FEATURE_NAME;
 
-            //设置内容延伸至标题栏
-            CoreApplicationView coreappview = CoreApplication.GetCurrentView();
-            coreappview.TitleBar.ExtendViewIntoTitleBar = false;
+            //设置tittleBar
+            TittleBarConfiguration conf = new TittleBarConfiguration();
+            conf.Effect();
             // 绑定导航菜单
             NavMenuPrimaryListView.ItemsSource = navMenuPrimaryItem;
             NavMenuSecondaryListView.ItemsSource = navMenuSecondaryItem;
