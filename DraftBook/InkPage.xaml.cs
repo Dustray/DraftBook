@@ -63,15 +63,14 @@ namespace DraftBook
         Symbol TouchWriting = (Symbol)0xED5F;
         Symbol ShowMoreBtn = (Symbol)0xE09A;
         Symbol HideMoreBtn = (Symbol)0xE09B;
-        string mainColor;
+        string mainColor= ThemeColor.mainColorL1.ToString();
 
         public InkPage()
         {
             this.InitializeComponent();
-            UISettings uiSettings = new UISettings();
-            mainColor = uiSettings.GetColorValue(UIColorType.AccentLight1).ToString();
+            NavigationCacheMode = NavigationCacheMode.Enabled;
             //设置鼠标和触摸可用
-            MainInkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Touch;
+            MainInkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse |CoreInputDeviceTypes.Pen;
 
             // Handlers to clear the selection when inking or erasing is detected
             MainInkCanvas.InkPresenter.StrokeInput.StrokeStarted += StrokeInput_StrokeStarted;

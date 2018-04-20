@@ -62,10 +62,10 @@
         <!--汉堡菜单开关-->
         <Button Name="PaneOpenButton" 
                 FontFamily="Segoe MDL2 Assets" Content="&#xE700;" Foreground="White" 
-                Background="{Binding BackgroundColor}" 
+                Background="{x:Bind mainColor}" 
                 Width="48" Height="48" 
                 VerticalAlignment="Top" Canvas.ZIndex="100" />
-        <SplitView Name="RootSplitView" DisplayMode="CompactOverlay" >
+        <SplitView Name="RootSplitView" DisplayMode="Overlay" >
             <SplitView.Pane >
                 <Grid Background="#CC000000">
                     <Grid.RowDefinitions>
@@ -90,7 +90,7 @@
                 </Grid>
             </SplitView.Pane>
             <SplitView.Content>
-                <Frame Name="RootFrame">
+                <Frame Name="RootFrame" Navigated="RootFrame_Navigated">
                 </Frame>
             </SplitView.Content>
 

@@ -1,4 +1,5 @@
-﻿using DraftBook.Navigation;
+﻿using DraftBook.Helper;
+using DraftBook.Navigation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,6 +29,7 @@ namespace DraftBook
     {
 
         public static MainPage Current;
+        string mainColor = ThemeColor.mainColor.ToString();
         // 为不同的菜单创建不同的List类型
         private List<NavMenuItem> navMenuPrimaryItem = new List<NavMenuItem>(
             new[]
@@ -111,9 +114,9 @@ namespace DraftBook
             Current = this;
             // SampleTitle.Text = FEATURE_NAME;
 
-            //获取系统颜色
+            //设置内容延伸至标题栏
             CoreApplicationView coreappview = CoreApplication.GetCurrentView();
-            coreappview.TitleBar.ExtendViewIntoTitleBar = true;
+            coreappview.TitleBar.ExtendViewIntoTitleBar = false;
             // 绑定导航菜单
             NavMenuPrimaryListView.ItemsSource = navMenuPrimaryItem;
             NavMenuSecondaryListView.ItemsSource = navMenuSecondaryItem;
@@ -127,8 +130,18 @@ namespace DraftBook
             NavMenuSecondaryListView.ItemClick += NavMenuListView_ItemClick;
             // 默认页
             RootFrame.SourcePageType = typeof(InkPage);
+            SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = RootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+        }
+        private void BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (RootFrame.CanGoBack)
+            {
+                RootFrame.GoBack();
+            }
         }
 
+        
         private void NavMenuListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             // 遍历，将选中Rectangle隐藏
@@ -151,7 +164,13 @@ namespace DraftBook
 
             RootSplitView.IsPaneOpen = false;
         }
-      
+
+       
+        private void RootFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = RootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+
+        }
     }
 }
 
